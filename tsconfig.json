@@ -9,5 +9,6 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["*/*.ts"]
 }
