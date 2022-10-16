@@ -70,45 +70,49 @@ export function relativeify(relative: string) {
 /**
  * Ast tree walk
  */
-export async function walk(
-  ast: Record<string, any>,
+export async function walk<T = Record<string, any>>(
+  ast: T,
   visitors: {
-    [type: string]: (node: Record<string, any>) => void | Promise<void>,
+    [type: string]: (node: T, ancestors: T[]) => void | Promise<void>,
   },
+  ancestors: T[] = [],
 ) {
   if (!ast) return
 
   if (Array.isArray(ast)) {
-    for (const element of ast as Record<string, any>[]) {
-      await walk(element, visitors)
+    for (const element of ast as T[]) {
+      await walk(element, visitors, ancestors)
     }
   } else {
+    ancestors = ancestors.concat(ast)
     for (const key of Object.keys(ast)) {
-      await (typeof ast[key] === 'object' && walk(ast[key], visitors))
+      await (typeof ast[key] === 'object' && walk(ast[key], visitors, ancestors))
     }
   }
 
-  await visitors[ast.type]?.(ast)
+  await visitors[(ast as any).type]?.(ast, ancestors)
 }
-walk.sync = function walkSync(
-  ast: Record<string, any>,
+
+walk.sync = function walkSync<T = Record<string, any>>(
+  ast: T,
   visitors: {
-    [type: string]: (node: Record<string, any>) => void | Promise<void>,
+    [type: string]: (node: T, ancestors: T[]) => void,
   },
+  ancestors: T[] = [],
 ) {
   if (!ast) return
 
   if (Array.isArray(ast)) {
-    for (const element of ast as Record<string, any>[]) {
-      walk.sync(element, visitors)
+    for (const element of ast as T[]) {
+      walkSync(element, visitors, ancestors)
     }
   } else {
+    ancestors = ancestors.concat(ast)
     for (const key of Object.keys(ast)) {
-      typeof ast[key] === 'object' && walk.sync(ast[key], visitors)
+      typeof ast[key] === 'object' && walkSync(ast[key], visitors, ancestors)
     }
   }
-
-  visitors[ast.type]?.(ast)
+  visitors[(ast as any).type]?.(ast, ancestors)
 }
 
 const isWindows = os.platform() === 'win32'
