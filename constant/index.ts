@@ -49,5 +49,18 @@ export const KNOWN_ASSET_TYPES = [
   'txt'
 ]
 
+// https://github.com/vitejs/vite/blob/29292af23fd7bc498056a7c048cac9b3bca3303d/packages/vite/src/node/optimizer/esbuildDepPlugin.ts#L20-L29
+export const KNOWN_CSS_TYPES = [
+  'css',
+  // supported pre-processor types
+  'less',
+  'sass',
+  'scss',
+  'styl',
+  'stylus',
+  'pcss',
+  'postcss',
+]
+
 export const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
 export const singlelineCommentsRE = /\/\/.*/g
