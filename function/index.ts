@@ -1,3 +1,5 @@
+import path from 'node:path'
+import os from 'node:os'
 
 export function cleanUrl(url: string) {
   const queryRE = /\?.*$/s
@@ -107,4 +109,12 @@ walk.sync = function walkSync(
   }
 
   visitors[ast.type]?.(ast)
+}
+
+const isWindows = os.platform() === 'win32'
+function slash(p: string): string {
+  return p.replace(/\\/g, '/')
+}
+export function normalizePath(id: string): string {
+  return path.posix.normalize(isWindows ? slash(id) : id)
 }
