@@ -64,16 +64,3 @@ export const KNOWN_CSS_TYPES = [
 
 export const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
 export const singlelineCommentsRE = /\/\/.*/g
-
-/**
-* @see https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
-* @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-*/
-export const COLOURS = {
-  $: (c: number) => (str: string) => `\x1b[${c}m` + str + '\x1b[0m',
-  gary: (str: string) => COLOURS.$(90)(str),
-  cyan: (str: string) => COLOURS.$(36)(str),
-  yellow: (str: string) => COLOURS.$(33)(str),
-  green: (str: string) => COLOURS.$(32)(str),
-  red: (str: string) => COLOURS.$(31)(str),
-};
