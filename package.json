@@ -1,9 +1,12 @@
 {
   "name": "vite-plugin-utils",
   "description": "A collection of opinionated Vite plugin utils",
-  "version": "0.3.3",
+  "version": "0.3.5",
   "type": "module",
   "main": "",
+  "exports": {
+    "./*": "./*/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vite-plugin/vite-plugin-utils.git"
@@ -26,7 +29,7 @@
     "utils"
   ],
   "files": [
-    "*/*.d.ts",
+    "*/*.ts",
     "*/*.js"
   ]
 }
