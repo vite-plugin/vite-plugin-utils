@@ -4,6 +4,9 @@
   "version": "0.3.3",
   "type": "module",
   "main": "",
+  "exports": {
+    "./*": "./*/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vite-plugin/vite-plugin-utils.git"
