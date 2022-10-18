@@ -6,7 +6,6 @@
     "moduleResolution": "Node",
     "allowJs": true,
     "baseUrl": ".",
-    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },
