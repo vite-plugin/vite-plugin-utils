@@ -11,7 +11,7 @@ export function cleanUrl(url: string) {
  * @see https://github.com/rich-harris/magic-string
  */
 export class MagicString {
-  private overwrites: { loc: [number, number]; content: string }[]
+  private overwrites!: { loc: [number, number]; content: string }[]
   private starts = ''
   private ends = ''
 
@@ -86,6 +86,7 @@ export async function walk<T = Record<string, any>>(
   } else {
     ancestors = ancestors.concat(ast)
     for (const key of Object.keys(ast)) {
+      // @ts-ignore
       await (typeof ast[key] === 'object' && walk(ast[key], visitors, ancestors))
     }
   }
@@ -109,6 +110,7 @@ walk.sync = function walkSync<T = Record<string, any>>(
   } else {
     ancestors = ancestors.concat(ast)
     for (const key of Object.keys(ast)) {
+      // @ts-ignore
       typeof ast[key] === 'object' && walkSync(ast[key], visitors, ancestors)
     }
   }
