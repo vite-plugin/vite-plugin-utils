@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-utils",
   "description": "A collection of opinionated Vite plugin utils",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "type": "module",
   "main": "",
   "exports": {
@@ -14,8 +14,8 @@
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "rm -rf dist && tsc --watch",
-    "build": "rm -rf dist && tsc",
+    "dev": "tsc --watch",
+    "build": "tsc",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
