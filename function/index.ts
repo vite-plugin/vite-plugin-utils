@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 
@@ -11,7 +12,7 @@ export function cleanUrl(url: string) {
  * @see https://github.com/rich-harris/magic-string
  */
 export class MagicString {
-  private overwrites!: { loc: [number, number]; content: string }[]
+  private overwrites!: { loc: [number, number], content: string }[]
   private starts = ''
   private ends = ''
 
@@ -136,4 +137,15 @@ export const COLOURS = {
   yellow: (str: string) => COLOURS.$(33)(str),
   green: (str: string) => COLOURS.$(32)(str),
   red: (str: string) => COLOURS.$(31)(str),
-};
+}
+
+export function node_modules(root: string, count = 0): string {
+  const p = path.join(root, 'node_modules')
+  if (fs.existsSync(p)) {
+    return p
+  }
+  if (count >= 19) {
+    throw new Error(`Can not found node_modules directory.\n  with: ${root}`)
+  }
+  return node_modules(path.join(root, '..'), count + 1)
+}
