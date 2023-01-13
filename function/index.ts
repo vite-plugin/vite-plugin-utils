@@ -139,13 +139,18 @@ export const COLOURS = {
   red: (str: string) => COLOURS.$(31)(str),
 }
 
-export function node_modules(root: string, count = 0): string {
-  const p = path.join(root, 'node_modules')
-  if (fs.existsSync(p)) {
-    return p
+const VOLUME_RE = /^[A-Z]:/i
+export function node_modules(root: string, paths: string[] = []): string[] {
+  if (!root) return paths
+  if (!(root.startsWith('/') || VOLUME_RE.test(root))) return paths
+
+  const p = path.posix.join(normalizePath(root), 'node_modules')
+  if (fs.existsSync(p) && fs.statSync(p).isDirectory()) {
+    paths = paths.concat(p)
   }
-  if (count >= 19) {
-    throw new Error(`Can not found node_modules directory.\n  with: ${root}`)
-  }
-  return node_modules(path.join(root, '..'), count + 1)
+  root = path.posix.join(root, '..')
+
+  return (root === '/' || /^[A-Z]:$/i.test(root))
+    ? paths
+    : node_modules(root, paths)
 }
