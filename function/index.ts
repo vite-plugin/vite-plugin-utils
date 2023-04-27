@@ -62,7 +62,7 @@ export function relativeify(relative: string) {
   if (relative === '') {
     return '.'
   }
-  if (!relative.startsWith('./') || !relative.startsWith('.\\')) {
+  if (!(relative.startsWith('./') || relative.startsWith('.\\'))) {
     return './' + relative
   }
   return relative
