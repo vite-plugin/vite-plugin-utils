@@ -58,14 +58,14 @@ export class MagicString {
  * - `'' -> '.'`
  * - `foo` -> `./foo`
  */
-export function relativeify(relative: string) {
-  if (relative === '') {
+export function relativeify(relativePath: string) {
+  if (relativePath === '') {
     return '.'
   }
-  if (!(relative.startsWith('./') || relative.startsWith('.\\'))) {
-    return './' + relative
+  if (!/^\.{1,2}[/\\]/.test(relativePath)) {
+    return './' + relativePath
   }
-  return relative
+  return relativePath
 }
 
 /**
