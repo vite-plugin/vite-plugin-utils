@@ -63,4 +63,4 @@ export const KNOWN_CSS_TYPES = [
 ]
 
 export const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
-export const singlelineCommentsRE = /\/\/.*/g
+export const singlelineCommentsRE = /\/\/.*(?=[\n\r])/g
