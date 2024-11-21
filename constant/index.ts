@@ -1,8 +1,10 @@
 
 // https://github.com/vitejs/vite/blob/c3f6731bafeadd310efa4325cb8dcc639636fe48/packages/vite/src/node/constants.ts#L25-L33
 export const DEFAULT_EXTENSIONS = [
+  '.cjs',
   '.mjs',
   '.js',
+  '.cts',
   '.mts',
   '.ts',
   '.jsx',
